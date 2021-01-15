@@ -19,6 +19,7 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  likedConfessions: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 UserSchema.methods.hash = async function (password) {
