@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const LikesSchema = mongoose.Schema({
-  confesseion: {
+  confession: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "confessions",
   },
@@ -11,7 +11,7 @@ const LikesSchema = mongoose.Schema({
   },
   comment: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: comments,
+    ref: "comments",
   },
 });
 

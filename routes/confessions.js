@@ -3,7 +3,7 @@ import validator from "express-validator";
 const { check } = validator;
 import {
   createConffesion,
-  likeDislikeConfessions,
+  deleteConfession,
 } from "../controllers/confessionController.js";
 import auth from "../middleware/auth.js";
 
@@ -15,6 +15,6 @@ router.post(
   createConffesion
 );
 
-router.get("/:id", auth, likeDislikeConfessions);
+router.delete("/:id", auth, deleteConfession);
 
 export default router;

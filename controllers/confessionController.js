@@ -18,23 +18,20 @@ export const createConffesion = async (req, res) => {
   }
 };
 
-export const likeDislikeConfessions = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  const confession = req.params.id;
+export const deleteConfession = async (req, res) => {
+  const user = req.user.id;
+  const confessionId = req.params.id;
   try {
-    let user = await User.findById(req.user.id);
-    if (user.likedConfessions.includes(confession)) {
-      user = await user.updateOne({ $pull: { likedConfessions: confession } });
-      return res.json(user);
-    } else {
-      user = await user.updateOne({ $push: { likedConfessions: confession } });
-      return res.json(user);
+    const confession = await Confession.findById(confessionId);
+    if (!confession) {
+      throw new Error("no such confession found");
     }
+    if (toString(user) !== toString(confession._id)) {
+      throw new Error("unauthorised request");
+    }
+    await Confession.findByIdAndDelete(confessionId);
+    return res.status(204).send();
   } catch (err) {
-    console.log(err.message);
-    return res.send(err.message);
+    res.status(500).json({ msg: err.message });
   }
 };
