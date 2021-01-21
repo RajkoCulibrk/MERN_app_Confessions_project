@@ -9,7 +9,12 @@ export const createConffesion = async (req, res) => {
   }
   const { body } = req.body;
   try {
-    const confession = new Confession({ user: req.user.id, body });
+    const { name } = await User.findById(req.user.id);
+    const confession = new Confession({
+      user: req.user.id,
+      body,
+      author: name,
+    });
     await confession.save();
     return res.json(confession);
   } catch (err) {
@@ -31,6 +36,16 @@ export const deleteConfession = async (req, res) => {
     }
     await Confession.findByIdAndDelete(confessionId);
     return res.status(204).send();
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
+};
+
+export const getConfessions = async (req, res) => {
+  console.log("ffffffffffff");
+  try {
+    const confessions = await Confession.find();
+    res.status(200).json(confessions);
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }

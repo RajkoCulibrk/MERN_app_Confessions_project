@@ -4,10 +4,12 @@ const { check } = validator;
 import {
   createConffesion,
   deleteConfession,
+  getConfessions,
 } from "../controllers/confessionController.js";
 import auth from "../middleware/auth.js";
 
 const router = express.Router();
+router.get("/", getConfessions);
 
 router.post(
   "/",

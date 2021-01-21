@@ -9,6 +9,7 @@ import Register from "./screens/Register";
 import { Container } from "react-bootstrap";
 import Login from "./screens/Login";
 import { login } from "./actions/userActions";
+import { loadConfessions } from "./actions/confessionsActions";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function App() {
   };
 
   useEffect(() => {
+    dispatch(loadConfessions());
     caller();
   }, [dispatch, caller]);
   return (
