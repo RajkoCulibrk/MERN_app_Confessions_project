@@ -1,13 +1,16 @@
 import axios from "axios";
 
-export const loadConfessions = () => async (dispatch) => {
+export const loadConfessions = (page) => async (dispatch) => {
   try {
     console.log("helo");
     dispatch({
       type: "CONFESSIONS_LOAD_REQUEST",
     });
 
-    const { data } = await axios.get("/api/confessions");
+    const { data } = await axios.post("/api/confessions/getconfessions", {
+      page,
+    });
+    const { confessions, end } = data;
     dispatch({
       type: "CONFESSIONS_LOAD_SUCCESS",
       payload: data,

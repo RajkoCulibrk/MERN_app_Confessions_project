@@ -42,10 +42,23 @@ export const deleteConfession = async (req, res) => {
 };
 
 export const getConfessions = async (req, res) => {
-  console.log("ffffffffffff");
+  console.log(req.body.page);
+  let page = req.body.page;
+  let limit = 5;
+  let skip = (page - 1) * limit;
   try {
-    const confessions = await Confession.find().sort("-created_at");
-    res.status(200).json(confessions);
+    const confessions = await Confession.find()
+      .sort("-created_at")
+      .skip(skip)
+      .limit(limit);
+    let numConfessions = await Confession.countDocuments();
+
+    if (limit * page > numConfessions) {
+      console.log("nema vise");
+      return res.status(200).json({ confessions, end: true });
+    }
+
+    res.status(200).json({ confessions, end: false });
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }

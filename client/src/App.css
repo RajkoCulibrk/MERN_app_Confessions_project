@@ -5,14 +5,16 @@
   padding: 0;
 }
 body {
-  background-image: url("./Pattern-Randomized.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: url("./Pattern-Randomized.svg");
+  background-size: contain;
   font-family: "Roboto", sans-serif;
   min-height: 100vh;
 }
 .navbar {
   background-color: rgb(90, 56, 153) !important;
+  transition: all 0.3s ease;
+  top: 0;
+  z-index: 100;
 }
 .background-main {
   background-color: rgb(90, 56, 153) !important;
@@ -168,6 +170,11 @@ body {
 }
 .login-register {
   width: 60%;
+}
+
+.no-more {
+  margin-bottom: 3rem !important;
+  color: red;
 }
 @media screen and (max-width: 600px) {
   .login-register {

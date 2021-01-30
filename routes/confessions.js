@@ -10,7 +10,7 @@ import {
 import auth from "../middleware/auth.js";
 
 const router = express.Router();
-router.get("/", getConfessions);
+router.post("/getconfessions", getConfessions);
 router.get("/:id", getSingleConfession);
 
 router.post(

@@ -2,7 +2,7 @@ import "./App.css";
 import Navigation from "./components/Navigation";
 import Home from "./screens/Home";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Register from "./screens/Register";
@@ -14,6 +14,9 @@ import SingleConfession from "./screens/SingleConfession";
 import setAuthToken from "./utils/setAuthToken";
 
 function App() {
+  const {
+    page: { page },
+  } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +27,8 @@ function App() {
         type: "CLEAR_ERROR",
       });
     };
-    dispatch(loadConfessions());
+    dispatch(loadConfessions(page));
+    dispatch({ type: "NEXT_PAGE" });
     caller();
   }, [dispatch]);
   return (

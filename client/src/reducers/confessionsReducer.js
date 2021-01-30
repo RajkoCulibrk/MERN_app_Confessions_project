@@ -6,7 +6,8 @@ export const confessionReducer = (state = { confessions: [] }, action) => {
       return {
         ...state,
         loading: false,
-        confessions: [...state.confessions, ...action.payload],
+        confessions: [...state.confessions, ...action.payload.confessions],
+        end: action.payload.end,
       };
     case "CONFESSIONS_LOAD_FAIL":
       return {

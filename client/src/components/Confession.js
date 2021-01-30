@@ -88,7 +88,7 @@ const Confession = ({ confession, singleScreen }) => {
           <Moment format="DD/MM/YYYY HH:mm" date={created_at} />
         </span>
       </div>
-      <div className="confession__body p-2  mb-2">{body}</div>
+      <div className="confession__body lead p-2 text-break  mb-2">{body}</div>
       <div className={`mb-4 transition ${replying ? "x" : "y"}`}>
         {replying && <PostComment id={_id} />}
       </div>
