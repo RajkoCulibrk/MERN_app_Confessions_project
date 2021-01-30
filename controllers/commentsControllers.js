@@ -1,14 +1,20 @@
 import Comment from "../models/Comments.js";
+import Confession from "../models/Confession.js";
+import User from "../models/User.js";
 export const postComment = async (req, res) => {
   const user = req.user.id;
+  const author = (await User.findById(user)).name;
+  console.log(author, "ovde");
   const { confession, comment, body } = req.body;
-  let commentToBeSaved = { user, body };
+  let commentToBeSaved = { user, body, author };
   if (comment) {
     commentToBeSaved.comment = comment;
+    await Comment.findByIdAndUpdate(comment, { $inc: { comments: 1 } });
   }
   if (confession) {
     commentToBeSaved.confession = confession;
     console.log(confession);
+    await Confession.findByIdAndUpdate(confession, { $inc: { comments: 1 } });
   }
 
   try {
@@ -25,7 +31,7 @@ export const postComment = async (req, res) => {
 export const getComments = async (req, res) => {
   const confession = req.params.id;
   try {
-    const comments = await Comment.find({ confession });
+    const comments = await Comment.find({ confession }).sort("-created_at");
     res.json(comments);
   } catch (err) {
     console.log(err.message);

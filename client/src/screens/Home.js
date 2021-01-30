@@ -1,21 +1,24 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loadConfessions } from "../actions/confessionsActions";
+import React from "react";
+import { useSelector } from "react-redux";
+
 import Confession from "../components/Confession";
+import PostConfession from "../components/PostConfession";
+import { Spinner } from "react-bootstrap";
+import SpinnerComonent from "../components/Spinner";
 
 const Home = () => {
-  const dispatch = useDispatch();
   const { confessionsList } = useSelector((state) => state);
-  const { confessions } = confessionsList;
+  const { confessions, loading } = confessionsList;
 
-  useEffect(() => {
-    console.log("ffffffffffffffffffff");
-  }, []);
   return (
-    <div className="w-60 m-auto bg-light">
-      {confessions.map((confession) => (
-        <Confession key={confession._id} confession={confession} />
-      ))}
+    <div className="">
+      {loading && <SpinnerComonent />}
+      <div className="pt-5 m-auto ">
+        {confessions.map((confession) => (
+          <Confession key={confession._id} confession={confession} />
+        ))}
+      </div>
+      <PostConfession />
     </div>
   );
 };

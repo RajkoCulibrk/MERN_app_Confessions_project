@@ -10,20 +10,23 @@ import { Container } from "react-bootstrap";
 import Login from "./screens/Login";
 import { login } from "./actions/userActions";
 import { loadConfessions } from "./actions/confessionsActions";
+import SingleConfession from "./screens/SingleConfession";
+import setAuthToken from "./utils/setAuthToken";
 
 function App() {
   const dispatch = useDispatch();
-  const caller = async () => {
-    await dispatch(login());
-    dispatch({
-      type: "CLEAR_ERROR",
-    });
-  };
 
   useEffect(() => {
+    setAuthToken(localStorage.getItem("token"));
+    const caller = async () => {
+      await dispatch(login());
+      dispatch({
+        type: "CLEAR_ERROR",
+      });
+    };
     dispatch(loadConfessions());
     caller();
-  }, [dispatch, caller]);
+  }, [dispatch]);
   return (
     <div className="App">
       <Router>
@@ -33,6 +36,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
+            <Route path="/confession/:id" component={SingleConfession} />
           </Switch>
         </Container>
       </Router>

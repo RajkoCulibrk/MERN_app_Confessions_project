@@ -5,11 +5,13 @@ import {
   createConffesion,
   deleteConfession,
   getConfessions,
+  getSingleConfession,
 } from "../controllers/confessionController.js";
 import auth from "../middleware/auth.js";
 
 const router = express.Router();
 router.get("/", getConfessions);
+router.get("/:id", getSingleConfession);
 
 router.post(
   "/",

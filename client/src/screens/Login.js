@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Button, Alert, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { authenticate, login } from "../actions/userActions";
+import { authenticate } from "../actions/userActions";
 import { Redirect } from "react-router-dom";
 
 const Login = () => {
@@ -18,7 +18,8 @@ const Login = () => {
   };
 
   return (
-    <Form onSubmit={submitHandler}>
+    <Form className="text-light login-register m-auto" onSubmit={submitHandler}>
+      <h2 className="text-center">Login</h2>
       {userInfo && <Redirect to="/" />}
       {loading && <Spinner animation="border" variant="primary" />}
 

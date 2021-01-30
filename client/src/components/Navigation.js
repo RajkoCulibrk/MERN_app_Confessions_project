@@ -7,10 +7,10 @@ import { logout } from "../actions/userActions";
 const Navigation = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const { authenticated, loading, userInfo } = user;
+  const { authenticated, userInfo } = user;
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar className="navbar" collapseOnSelect expand="lg">
         <Link to="/">Confessions</Link>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -27,11 +27,11 @@ const Navigation = () => {
             ) : (
               <>
                 {" "}
-                <Link to="/login">
+                <Link className="ml-auto mr-2" to="/login">
                   {" "}
                   <Button variant="outline-light">Login</Button>
                 </Link>
-                <Link to="/Register">
+                <Link className="ml-auto mr-2" to="/Register">
                   {" "}
                   <Button variant="outline-light">Register</Button>
                 </Link>

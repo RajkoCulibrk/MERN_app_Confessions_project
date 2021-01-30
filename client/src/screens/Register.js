@@ -20,18 +20,19 @@ const Register = () => {
   const user = useSelector((state) => state.user);
   const { error, loading, userInfo } = user;
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className="text-light m-auto" onSubmit={handleSubmit}>
+      <h2 className="text-center">Register</h2>
       {userInfo && <Redirect to="/" />}
       {loading && <Spinner animation="border" variant="primary" />}
 
       {error?.length > 1 && <Alert variant="danger">{error}</Alert>}
       <Form.Group controlId="formBasicPassword">
-        <Form.Label>name</Form.Label>
+        <Form.Label>Username</Form.Label>
         <Form.Control
           onChange={(e) => setname(e.target.value)}
           value={name}
           type="text"
-          placeholder="name"
+          placeholder="Username"
         />
       </Form.Group>
 
@@ -43,7 +44,7 @@ const Register = () => {
           type="email"
           placeholder="Email"
         />
-        <Form.Text className="text-muted">
+        <Form.Text className="text-light">
           We'll never share your email with anyone else.
         </Form.Text>
       </Form.Group>

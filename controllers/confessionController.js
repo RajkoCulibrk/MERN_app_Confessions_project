@@ -44,9 +44,23 @@ export const deleteConfession = async (req, res) => {
 export const getConfessions = async (req, res) => {
   console.log("ffffffffffff");
   try {
-    const confessions = await Confession.find();
+    const confessions = await Confession.find().sort("-created_at");
     res.status(200).json(confessions);
   } catch (err) {
     res.status(500).json({ msg: err.message });
+  }
+};
+
+export const getSingleConfession = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const confession = await Confession.findById(id);
+    if (!confession) {
+      res.status(404).json({ msg: err.message });
+    }
+    res.status(200).json({ confession });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
   }
 };

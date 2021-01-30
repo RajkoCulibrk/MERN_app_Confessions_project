@@ -20,6 +20,10 @@ const ConfessionSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    comments: {
+      type: Number,
+      default: 0,
+    },
     dislikes: {
       type: Number,
       default: 0,
@@ -28,6 +32,7 @@ const ConfessionSchema = mongoose.Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
+    timestamps: { createdAt: "created_at" },
   }
 );
 

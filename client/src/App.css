@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-image: url("./Pattern-Randomized.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+}
+.navbar {
+  background-color: rgb(90, 56, 153) !important;
+}
+.background-main {
+  background-color: rgb(90, 56, 153) !important;
+}
+.color-main {
+  color: rgb(214, 206, 231) !important;
+}
+.navbar a {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-family: "Lobster", cursive;
+  color: rgb(214, 206, 231);
+  text-shadow: 2px 2px 2px black;
+  letter-spacing: 2px;
+}
+.navbar a:hover {
+  text-decoration: none;
+  color: rgb(159, 140, 196);
+}
+.add-confession {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  transition: all 1s ease;
+  outline: none !important;
+  border: none !important;
+  background-color: rgb(159, 140, 196) !important;
+  box-shadow: none !important;
+}
+
+.add-confession:hover {
+  transform: scale(1.1);
+  outline: none !important;
+}
+.confession {
+  width: 60% !important;
+  box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.301) !important;
+  background-color: rgb(118, 92, 167) !important;
+  transition: all 0.5s ease;
+}
+.confession:hover {
+  background-color: rgb(84, 64, 119) !important;
+  transform: scale(1.05);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.623) !important;
+}
+.confession__header {
+  background-color: rgba(106, 63, 180, 0.637) !important;
+}
+.confession_button {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: rgba(0, 0, 0, 0.466) !important;
+}
+.liked {
+  color: rgb(0, 255, 42) !important;
+}
+.disliked {
+  color: rgb(255, 0, 0) !important;
+}
+.white {
+  color: white;
+}
+
+.commentFullWidth {
+  width: 100% !important;
+}
+.background {
+  background-color: blue !important;
+}
+.nema {
+  transform: scaleY(0);
+  height: 0px;
+}
+.ima {
+  transform: scaleY(1);
+}
+.comment {
+  width: 90%;
+  transition: all 0.2s linear !important;
+  box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.301) !important;
+  background-color: rgb(118, 92, 167) !important;
+}
+.subcomments {
+  transition: all 0.5s ease !important;
+}
+.subcomment:hover {
+  background-color: rgba(71, 66, 80, 0.205) !important;
+}
+.subcomments-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 60% !important;
+}
+
+.x {
+  height: 50px !important;
+}
+.y {
+  height: 0px !important;
+}
+
+.nula {
+  height: 0px !important;
+}
+
+.auto {
+  height: auto !important;
+}
+.transition {
+  transition: all 0.3s ease !important;
+}
+.heightnula {
+  padding: 0;
+  margin: 0;
+  height: 0px !important;
+  opacity: 0;
+  transform: scaleY(0);
+  position: absolute;
+  right: 0;
+}
+.heightnula2 {
+  transform: scaleY(0) !important;
+}
+.pokazi {
+  opacity: 1;
+  transform: scaleY(1) !important;
+}
+
+.border-bottom {
+  border-bottom: 2px solid red !important;
+}
+.border-showing-comments {
+  border-left: 4px solid gray !important;
+  border-bottom: 4px solid gray !important;
+}
+.border-top {
+  border-top: 2px solid gray;
+}
+.border-left {
+  border-left: 2px solid gray;
+}
+.confession__body {
+  white-space: pre-line;
+}
+.line {
+  height: 2px;
+  width: 100%;
+  background-color: gray;
+}
+.login-register {
+  width: 60%;
+}
+@media screen and (max-width: 600px) {
+  .login-register {
+    width: 100%;
+  }
+  .confession {
+    width: 100% !important;
+  }
+  .subcomments-container {
+    width: 100% !important;
+  }
+}

@@ -1,12 +1,12 @@
 import {
   USER_LOGIN_REQUEST,
-  USER_LOGIN_FAIL,
   USER_LOGIN_SUCCESS,
 } from "../constants/userConstants";
 import setAuthToken from "../utils/setAuthToken";
 import axios from "axios";
 
 export const login = () => async (dispatch) => {
+  console.log("login function");
   setAuthToken(localStorage.getItem("token"));
   try {
     dispatch({

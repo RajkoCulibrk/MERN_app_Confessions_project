@@ -2,10 +2,17 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { userReducer } from "./reducers/userReducers";
-import { confessionReducer } from "./reducers/confessionsReducer";
+import {
+  confessionReducer,
+  singleConfessionReducer,
+} from "./reducers/confessionsReducer";
+import { commentReducer, subcommentReducer } from "./reducers/commentsReducers";
 const reducer = combineReducers({
   user: userReducer,
   confessionsList: confessionReducer,
+  singleConfession: singleConfessionReducer,
+  commentsList: commentReducer,
+  subCommentsList: subcommentReducer,
 });
 const user = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
