@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Confession from "../components/Confession";
 import PostConfession from "../components/PostConfession";
-import { Spinner } from "react-bootstrap";
+
 import SpinnerComonent from "../components/Spinner";
 import { loadConfessions } from "../actions/confessionsActions";
 
-const Home = ({ match }) => {
+import FilteringSorting from "../components/FilteringSorting";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "react-bootstrap";
+import { HashLink as Link } from "react-router-hash-link";
+const Home = () => {
   const dispatch = useDispatch();
-  const [state, setState] = useState(true);
+  const toTheTopButton = useRef();
 
-  const {
+  let {
     confessionsList,
-    page: { page },
+    pagination: { page, sortOrder, sortBy },
   } = useSelector((state) => state);
-  const { confessions, loading, end } = confessionsList;
-  const fetchConfessions = async () => {
-    dispatch({ type: "NEXT_PAGE" });
-    console.log(page, "promena");
-    dispatch(loadConfessions(page));
-  };
+  const { confessions, loading, end, submitting } = confessionsList;
 
   useEffect(() => {
+    const fetchConfessions = async () => {
+      dispatch({ type: "NEXT_PAGE" });
+      console.log(page, "promena");
+      dispatch(loadConfessions({ page, sortBy, sortOrder }));
+    };
     const fetchuj = () => {
       if (
         document.documentElement.scrollHeight - 100 <
@@ -31,28 +36,39 @@ const Home = ({ match }) => {
         !end
       ) {
         fetchConfessions();
-        console.log("trulu");
       }
-      /* console.log(
-          document.documentElement.scrollHeight,
-          window.pageYOffset + window.innerHeight
-        ); */
+    };
+    const showHideToTheTopButton = () => {
+      if (window.pageYOffset > 1000) {
+        toTheTopButton.current.style.visibility = "visible";
+        console.log(toTheTopButton);
+      } else {
+        toTheTopButton.current.style.visibility = "hidden";
+      }
     };
     document.addEventListener("scroll", fetchuj);
+    document.addEventListener("scroll", showHideToTheTopButton);
     return () => {
-      /* setState(false); */
       document.removeEventListener("scroll", fetchuj);
+      document.removeEventListener("scroll", showHideToTheTopButton);
     };
-  });
+    // eslint-disable-next-line
+  }, [end, loading, dispatch, page]);
+
   return (
     <div className="pt-5">
+      <div id="g"></div>
       <div className="pt-5 m-auto ">
+        <FilteringSorting />
+        {submitting && <SpinnerComonent />}
+
         {confessions.map((confession) => (
           <Confession key={confession._id} confession={confession} />
         ))}
         {loading && <SpinnerComonent />}
+
         {!end ? (
-          <button onClick={fetchConfessions}>load jos</button>
+          ""
         ) : (
           <div className="ml-auto mr-auto pt-2 pb-2 text-light text-center lead font-weight-bold font-italic text-uppercase confession no-more">
             No more content
@@ -60,6 +76,14 @@ const Home = ({ match }) => {
         )}
       </div>
       <PostConfession />
+      <Link to="#g">
+        <Button
+          ref={toTheTopButton}
+          className="to-the-top rounded-circle text-light"
+        >
+          <FontAwesomeIcon icon={faArrowUp} />
+        </Button>
+      </Link>
     </div>
   );
 };

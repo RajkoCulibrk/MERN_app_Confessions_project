@@ -5,15 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../actions/userActions";
 const Navigation = () => {
-  let tuki = useRef();
+  let nav = useRef();
 
   let current = 0;
   document.addEventListener("scroll", () => {
     let scrolled = window.pageYOffset;
     if (current - scrolled < 0) {
-      tuki.current.style.transform = "translateY(-100%)";
+      nav.current.style.transform = "translateY(-100%)";
     } else {
-      tuki.current.style.transform = "translateY(0%)";
+      nav.current.style.transform = "translateY(0%)";
     }
     current = window.pageYOffset;
   });
@@ -23,7 +23,7 @@ const Navigation = () => {
   return (
     <div>
       <Navbar
-        ref={tuki}
+        ref={nav}
         className="navbar position-fixed w-100"
         collapseOnSelect
         expand="lg"

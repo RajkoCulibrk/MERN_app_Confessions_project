@@ -55,14 +55,14 @@ export const authenticate = (email, password) => async (dispatch) => {
 
 export const setAlert = (text) => async (dispatch) => {
   dispatch({
-    type: "SET_ERROR",
+    type: "SET_LOGIN_ERROR",
     payload: text,
   });
   let errTimeout;
   clearTimeout(errTimeout);
   errTimeout = setTimeout(() => {
     dispatch({
-      type: "CLEAR_ERROR",
+      type: "CLEAR_LOGIN_ERROR",
     });
   }, 5000);
 };

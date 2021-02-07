@@ -12,15 +12,15 @@ const SingleConfession = () => {
 
   const { singleConfession, commentsList } = useSelector((state) => state);
   let { comments } = commentsList;
-  const { confession, loading, error } = singleConfession;
+  const { confession, loading } = singleConfession;
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(loadSingleConfession(id));
     dispatch(loadComments(id));
-  }, []);
+  }, [dispatch, id]);
   return (
-    <div className="mt-5">
+    <div className="mt-5 pt-5">
       {loading ? (
         <SpinnerComonent />
       ) : (

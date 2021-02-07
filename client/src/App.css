@@ -4,6 +4,9 @@
   margin: 0;
   padding: 0;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   background: url("./Pattern-Randomized.svg");
   background-size: contain;
@@ -44,7 +47,23 @@ body {
   background-color: rgb(159, 140, 196) !important;
   box-shadow: none !important;
 }
-
+.to-the-top {
+  position: fixed;
+  left: 1rem;
+  font-size: 1rem;
+  padding: 0.7rem;
+  visibility: hidden;
+  bottom: 1rem;
+  background-color: rgb(159, 140, 196) !important;
+  box-shadow: none;
+  transition: all 0.3s ease;
+  outline: none !important;
+  border: none !important;
+}
+.to-the-top:hover {
+  transform: scale(1.1);
+  outline: none !important;
+}
 .add-confession:hover {
   transform: scale(1.1);
   outline: none !important;
@@ -77,6 +96,10 @@ body {
 }
 .white {
   color: white;
+}
+
+.border-none {
+  border: none !important;
 }
 
 .commentFullWidth {
@@ -176,6 +199,10 @@ body {
   margin-bottom: 3rem !important;
   color: red;
 }
+.lll {
+  width: 100%;
+}
+
 @media screen and (max-width: 600px) {
   .login-register {
     width: 100%;

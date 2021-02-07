@@ -8,13 +8,16 @@ import {
 } from "./reducers/confessionsReducer";
 import { commentReducer, subcommentReducer } from "./reducers/commentsReducers";
 import paginationReducer from "./reducers/paginationReducer";
+import errorsReducer from "./reducers/errorsReducer";
+
 const reducer = combineReducers({
   user: userReducer,
   confessionsList: confessionReducer,
   singleConfession: singleConfessionReducer,
   commentsList: commentReducer,
   subCommentsList: subcommentReducer,
-  page: paginationReducer,
+  pagination: paginationReducer,
+  errors: errorsReducer,
 });
 const user = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

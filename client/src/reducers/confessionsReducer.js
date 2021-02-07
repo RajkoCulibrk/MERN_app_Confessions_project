@@ -20,11 +20,17 @@ export const confessionReducer = (state = { confessions: [] }, action) => {
         ...state,
         submitting: true,
       };
-    case "POST_CONFESSION_success":
+    case "POST_CONFESSION_SUCCESS":
       return {
         ...state,
         confessions: [action.payload, ...state.confessions],
         submitting: false,
+      };
+    case "RESET_CONFESSIONS":
+      return {
+        ...state,
+        confessions: [],
+        loading: true,
       };
     default:
       return state;

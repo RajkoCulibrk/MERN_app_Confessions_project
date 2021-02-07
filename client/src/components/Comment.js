@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 import Moment from "react-moment";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,7 +11,7 @@ import {
 } from "../actions/commentsActions";
 import PostComment from "./PostComment";
 import CommentFooter from "./CommentFooter";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { setError } from "../actions/errorsActions";
 
 const Comment = ({ comment, thisIsSubcomment }) => {
   const dispatch = useDispatch();
@@ -37,7 +37,6 @@ const Comment = ({ comment, thisIsSubcomment }) => {
   const history = useHistory();
   let [replying, setRepying] = useState(false);
   const showReply = () => {
-    console.log("rrrrrrrrrrrr");
     setRepying(!replying);
   };
   const likeHandler = () => {
@@ -55,6 +54,7 @@ const Comment = ({ comment, thisIsSubcomment }) => {
       SetLiked(!liked);
     } else {
       history.push("/login");
+      dispatch(setError("You have to be logged in to perform that action. "));
     }
   };
 
@@ -72,6 +72,7 @@ const Comment = ({ comment, thisIsSubcomment }) => {
       }
       SetDisliked(!disliked);
     } else {
+      dispatch(setError("You have to be logged in to perform that action. "));
       history.push("/login");
     }
   };

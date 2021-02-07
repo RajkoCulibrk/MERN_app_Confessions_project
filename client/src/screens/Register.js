@@ -20,7 +20,10 @@ const Register = () => {
   const user = useSelector((state) => state.user);
   const { error, loading, userInfo } = user;
   return (
-    <Form className="text-light m-auto" onSubmit={handleSubmit}>
+    <Form
+      className="text-light login-register ml-auto mr-auto mt-5 pt-5"
+      onSubmit={handleSubmit}
+    >
       <h2 className="text-center">Register</h2>
       {userInfo && <Redirect to="/" />}
       {loading && <Spinner animation="border" variant="primary" />}
@@ -71,7 +74,11 @@ const Register = () => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button
+        className="background-main text-light"
+        variant="outline-light"
+        type="submit"
+      >
         Submit
       </Button>
     </Form>

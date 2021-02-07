@@ -21,9 +21,9 @@ export const userReducer = (state = { error: [] }, action) => {
 
     case USER_LOGOUT:
       return { error: [], loading: false };
-    case "SET_ERROR":
+    case "SET_LOGIN_ERROR":
       return { loading: false, error: action.payload };
-    case "CLEAR_ERROR":
+    case "CLEAR_LOGIN_ERROR":
       return {
         ...state,
         error: [],

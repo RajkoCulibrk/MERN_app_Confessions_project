@@ -56,7 +56,11 @@ export const postComment = (confession, body, subcomment = false) => async (
       });
     }
   } catch (error) {
-    console.log(error);
+    let errorMessage = error.response.data.errors
+      ? error.response.data.errors[0].msg
+      : error.response.data.msg;
+
+    console.log(errorMessage);
   }
 };
 

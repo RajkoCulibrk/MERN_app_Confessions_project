@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Form, Button, Alert, Spinner } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../actions/userActions";
 import { Redirect } from "react-router-dom";
-
+import SpinnerComonent from "../components/Spinner";
+import Error from "../components/Error";
 const Login = () => {
-  const user = useSelector((state) => state.user);
+  const { user, errors } = useSelector((state) => state);
   const { error, loading, userInfo } = user;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,11 +19,16 @@ const Login = () => {
   };
 
   return (
-    <Form className="text-light login-register m-auto" onSubmit={submitHandler}>
+    <Form
+      className="text-light login-register ml-auto mr-auto mt-5 pt-5 "
+      onSubmit={submitHandler}
+    >
       <h2 className="text-center">Login</h2>
       {userInfo && <Redirect to="/" />}
-      {loading && <Spinner animation="border" variant="primary" />}
-
+      {loading && <SpinnerComonent />}
+      {errors.map((error) => (
+        <Error key={error.id} error={error} />
+      ))}
       {error?.length > 1 && <Alert variant="danger">{error}</Alert>}
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
@@ -44,7 +50,11 @@ const Login = () => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button
+        className="background-main text-light"
+        variant="outline-light"
+        type="submit"
+      >
         Submit
       </Button>
     </Form>

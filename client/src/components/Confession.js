@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { like, dislike, checkIfLiked } from "../actions/confessionsActions";
 import { useHistory, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -10,8 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Moment from "react-moment";
 import PostComment from "./PostComment";
+import { setError } from "../actions/errorsActions";
 
 const Confession = ({ confession, singleScreen }) => {
+  const dispatch = useDispatch();
   let { body, _id, likes, dislikes, author, created_at, comments } = confession;
 
   const { user } = useSelector((state) => state);
@@ -39,6 +41,8 @@ const Confession = ({ confession, singleScreen }) => {
       }
       SetLiked(!liked);
     } else {
+      dispatch(setError("You have to be logged in to perform that action."));
+
       history.push("/login");
     }
   };
@@ -57,6 +61,7 @@ const Confession = ({ confession, singleScreen }) => {
       }
       SetDisliked(!disliked);
     } else {
+      dispatch(setError("You have to be logged in to perform that action."));
       history.push("/login");
     }
   };

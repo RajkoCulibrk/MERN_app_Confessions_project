@@ -1,16 +1,16 @@
 import axios from "axios";
 
 export const loadConfessions = (page) => async (dispatch) => {
+  console.log("loading confessions");
   try {
-    console.log("helo");
     dispatch({
       type: "CONFESSIONS_LOAD_REQUEST",
     });
-
+    console.log(page, "sssss");
     const { data } = await axios.post("/api/confessions/getconfessions", {
-      page,
+      ...page,
     });
-    const { confessions, end } = data;
+
     dispatch({
       type: "CONFESSIONS_LOAD_SUCCESS",
       payload: data,
@@ -50,9 +50,12 @@ export const checkIfLiked = async (id) => {
 
 export const postConfession = (body) => async (dispatch) => {
   try {
+    dispatch({
+      type: "POST_CONFESSION_REQUEST",
+    });
     const { data: confession } = await axios.post("/api/confessions", { body });
     dispatch({
-      type: "POST_CONFESSION_success",
+      type: "POST_CONFESSION_SUCCESS",
       payload: confession,
     });
     console.log(confession);
@@ -87,4 +90,29 @@ export const loadSingleConfession = (id) => async (dispatch) => {
       payload: errorMessage,
     });
   }
+};
+
+export const setSortOrder = (sortOrder) => async (dispatch) => {
+  await dispatch({
+    type: "SET_SORT_ORDER",
+    payload: sortOrder,
+  });
+};
+
+export const setSortBy = (sortBy) => async (dispatch) => {
+  await dispatch({
+    type: "SET_SORT_BY",
+    payload: sortBy,
+  });
+};
+
+export const resetConfessions = () => async (dispatch) => {
+  await dispatch({
+    type: "RESET_CONFESSIONS",
+  });
+};
+export const resetPage = () => async (dispatch) => {
+  await dispatch({
+    type: "RESET_PAGE",
+  });
 };

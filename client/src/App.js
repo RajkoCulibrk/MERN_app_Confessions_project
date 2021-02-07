@@ -9,26 +9,36 @@ import Register from "./screens/Register";
 import { Container } from "react-bootstrap";
 import Login from "./screens/Login";
 import { login } from "./actions/userActions";
-import { loadConfessions } from "./actions/confessionsActions";
+import {
+  loadConfessions,
+  resetConfessions,
+} from "./actions/confessionsActions";
 import SingleConfession from "./screens/SingleConfession";
 import setAuthToken from "./utils/setAuthToken";
 
 function App() {
-  const {
-    page: { page },
+  let {
+    pagination: { page, sortOrder, sortBy },
   } = useSelector((state) => state);
+
   const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(sortBy, "setsortby");
+    dispatch(resetConfessions());
+    dispatch(loadConfessions({ page, sortOrder, sortBy }));
+    dispatch({ type: "NEXT_PAGE" });
+    // eslint-disable-next-line
+  }, [sortOrder, sortBy, dispatch]);
 
   useEffect(() => {
     setAuthToken(localStorage.getItem("token"));
     const caller = async () => {
       await dispatch(login());
       dispatch({
-        type: "CLEAR_ERROR",
+        type: "CLEAR_LOGIN_ERROR",
       });
     };
-    dispatch(loadConfessions(page));
-    dispatch({ type: "NEXT_PAGE" });
+
     caller();
   }, [dispatch]);
   return (
