@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//loads the comments of a confession based on the confession id
 export const loadComments = (id) => async (dispatch) => {
   try {
     let { data: comments } = await axios.get(`/api/comments/confession/${id}`);
@@ -15,6 +16,7 @@ export const loadComments = (id) => async (dispatch) => {
   }
 };
 
+//fetches the subcomments (comments of a comment) based on the comment id
 export const loadSubcomments = (id) => async (dispatch) => {
   try {
     let { data: comments } = await axios.get(`/api/comments/subcomment/${id}`);
@@ -31,6 +33,7 @@ export const loadSubcomments = (id) => async (dispatch) => {
   }
 };
 
+//post a comment if the user has been loged in or a subcomment if the parameter subbcoment has been set to true insetead of its false default value
 export const postComment = (confession, body, subcomment = false) => async (
   dispatch
 ) => {
@@ -64,13 +67,17 @@ export const postComment = (confession, body, subcomment = false) => async (
   }
 };
 
+//sends data to the server to add / remove a like based on the id of a comment
 export const like = (id) => {
   axios.post(`/api/likesdislikes/comment/like/${id}`);
 };
+
+//sends data to the server to add / remove a dislike based on the id of a comment
 export const dislike = (id) => {
   axios.post(`/api/likesdislikes/comment/dislike/${id}`);
 };
 
+//checks if a comment or a confession has been liked , the data provided looks like { liked: true, disliked: false }
 export const checkIfLiked = async (id) => {
   try {
     const { data } = await axios.post("/api/likesdislikes/", {

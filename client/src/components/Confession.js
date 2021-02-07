@@ -22,11 +22,15 @@ const Confession = ({ confession, singleScreen }) => {
   let [dislikesDisplayed, setDislikesDisplayed] = useState(dislikes);
   let [liked, SetLiked] = useState(false);
   let [disliked, SetDisliked] = useState(false);
+  /// if repling is true displays the post comment component
   let [replying, setRepying] = useState(false);
   let history = useHistory();
+
   const showReply = () => {
     setRepying(!replying);
   };
+
+  // if user is not logged in redirects the user to login. Else increments the number of likes displayed , adn dispatches the like action to for the like data to be persisted to the server. If the confession is disliked removes the r ed color from the dislike button and dicrements dislikes displayed.
   const likeHandler = () => {
     if (userInfo) {
       like(_id);
@@ -46,7 +50,7 @@ const Confession = ({ confession, singleScreen }) => {
       history.push("/login");
     }
   };
-
+  // the same as likeHandler but for dislikes
   const dislikeHandler = () => {
     if (userInfo) {
       dislike(_id);
@@ -65,6 +69,8 @@ const Confession = ({ confession, singleScreen }) => {
       history.push("/login");
     }
   };
+
+  // dispatches the checkLikeDislike action when the component is loaded and the user is logged in so the liked disliked variables  can be set to true or false and the colors of the buttons changed accordinly. UseEffect cleanup is used so the fetching only happens when the component is mounted and when it is unmounted we do not update its state because it is dismoundet and we do not get error that the component has dismounted but we are trying to update its state.
 
   useEffect(() => {
     let isMounted = true;

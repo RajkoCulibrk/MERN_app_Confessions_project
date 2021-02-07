@@ -2,6 +2,8 @@ import User from "../models/User.js";
 import validator from "express-validator";
 const { validationResult } = validator;
 import jwt from "jsonwebtoken";
+
+//creates a new user and sends back a JSON Web Token
 export const registerUser = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -48,6 +50,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
+//logges in a user and sends back a JSON Web Token
 export const loginUser = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

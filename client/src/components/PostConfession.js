@@ -17,6 +17,7 @@ const PostConfession = () => {
   const {
     user: { userInfo },
   } = useSelector((state) => state);
+  // if user is not logged in redirects him to loggin and dispatches setError action  , shows and hides the modal.
   const handleShow = () => {
     if (!userInfo) {
       dispatch(setError("Please sign in in order to confess."));
@@ -25,6 +26,7 @@ const PostConfession = () => {
     }
     setShow(true);
   };
+
   const handlePost = () => {
     dispatch(postConfession(confession));
     setConfession("");

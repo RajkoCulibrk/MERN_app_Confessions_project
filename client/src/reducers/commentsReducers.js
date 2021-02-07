@@ -18,6 +18,7 @@ export const commentReducer = (state = { comments: [] }, action) => {
 export const subcommentReducer = (state = { subcomments: [] }, action) => {
   switch (action.type) {
     case "LOAD_SUBCOMMENTS_SUCCESS":
+      /// filtering only the subcomments of a specifing comment so the comment gets only the the replies that are refering that comment and not comments of some other comment. And in this way we re awoiding seeing the comment h=that we have posted and that fetched from the database twice because when we post a comment it gets added to other comments on the client side and siplayed right away so when we fetch other commens we get that same comment that we posted againg. In this way that comment won appear tow times
       let temp = [...action.payload, ...state.subcomments];
       let filteredComments = [];
       temp.forEach((com) => {

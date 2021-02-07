@@ -22,6 +22,8 @@ function App() {
   } = useSelector((state) => state);
 
   const dispatch = useDispatch();
+
+  // when sortOrder,sortBy variables in redux store have been changed the confessions will be reset to [], new fetching of confessions will be initialized using newly set pagination sorting and filtering parameters. In the end NEXT_PAGE action will be dispatched on the next fetching se get the data for the next page.
   useEffect(() => {
     dispatch(resetConfessions());
     dispatch(loadConfessions({ page, sortOrder, sortBy }));
@@ -29,6 +31,7 @@ function App() {
     // eslint-disable-next-line
   }, [sortOrder, sortBy, dispatch]);
 
+  /// when the component first renders the axios default headers will be set ore removed depending if there is a token in the local storrage. Login action will be dispatched and user logged in or logged out if the token has expired.
   useEffect(() => {
     setAuthToken(localStorage.getItem("token"));
     const caller = async () => {

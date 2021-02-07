@@ -2,6 +2,8 @@ import Confession from "../models/Confession.js";
 import User from "../models/User.js";
 import validator from "express-validator";
 const { validationResult } = validator;
+
+// creates a confession if the user is logged in
 export const createConffesion = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -22,6 +24,7 @@ export const createConffesion = async (req, res) => {
   }
 };
 
+//deletes a confession if it belongs to the user
 export const deleteConfession = async (req, res) => {
   const user = req.user.id;
   const confessionId = req.params.id;
@@ -40,13 +43,13 @@ export const deleteConfession = async (req, res) => {
   }
 };
 
+//gets the confessions , implements pagination sorting and filtering
 export const getConfessions = async (req, res) => {
   let page = req.body.page;
   let limit = 5;
   let skip = (page - 1) * limit;
   let sortOrder = req.body.sortOrder;
   let sortBy = req.body.sortBy;
-  /* let sortQuery = sortOrder + sortBy */
 
   try {
     const c = Confession.find()
@@ -70,6 +73,7 @@ export const getConfessions = async (req, res) => {
   }
 };
 
+//gets the data about only one confession
 export const getSingleConfession = async (req, res) => {
   const id = req.params.id;
 

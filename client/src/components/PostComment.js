@@ -10,11 +10,13 @@ import { useHistory } from "react-router-dom";
 const PostComment = ({ id, subcomment, setRepying }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  // the body of the comment that the user types in
   const [comment, setComment] = useState("");
   const {
     user: { userInfo },
   } = useSelector((state) => state);
 
+  // sets the body of the comment back to "" , if the user is not logged in redirects him to loggin page and sipatches setError action. If this component is rendered within a confession component the postComment action will not receive a subcomment parameter which will be then set to false in the action so the functionality for perssisting a comment of a confession is triggered otherwise the functionality for persisting a comment of a comment to the database will be trigered.
   const postCommentHandler = () => {
     setComment("");
     if (!userInfo) {

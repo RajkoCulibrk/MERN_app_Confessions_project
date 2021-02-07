@@ -3,6 +3,8 @@ import Confession from "../models/Confession.js";
 import User from "../models/User.js";
 import validator from "express-validator";
 const { validationResult } = validator;
+
+//post comment : posts comment and increments the number of comments on a confessions or a comment
 export const postComment = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -32,6 +34,7 @@ export const postComment = async (req, res) => {
   }
 };
 
+/// gets all the comments of a confession or comment
 export const getComments = async (req, res) => {
   const confession = req.params.id;
   try {
@@ -41,6 +44,8 @@ export const getComments = async (req, res) => {
     res.status(500).send(err.message);
   }
 };
+
+//gets the subcomments basiclu comments of a comment
 export const getSubComments = async (req, res) => {
   const comment = req.params.id;
   try {
@@ -51,6 +56,7 @@ export const getSubComments = async (req, res) => {
   }
 };
 
+//deletes the  comment if the comment belongs to the user who posted it
 export const deleteComment = async (req, res) => {
   const commentId = req.params.id;
 

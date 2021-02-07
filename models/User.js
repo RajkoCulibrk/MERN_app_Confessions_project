@@ -21,12 +21,12 @@ const UserSchema = mongoose.Schema({
   },
   likedConfessions: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
-
+// for hashing the password
 UserSchema.methods.hash = async function (password) {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(password, salt);
 };
-
+// for comparing passwords provided by the user when logging in and comparing it with the hashed password in the database
 UserSchema.methods.comparePasswords = async function (password) {
   return await bcrypt.compare(password, this.password);
 };

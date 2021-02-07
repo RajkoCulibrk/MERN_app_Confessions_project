@@ -22,7 +22,9 @@ const Home = () => {
   } = useSelector((state) => state);
   const { confessions, loading, end, submitting } = confessionsList;
 
+  // setting a scroll event listener that fetches data when we scroll to the bottom of the page when the component mounts, and removing it when the component unmounts.
   useEffect(() => {
+    // dispathces load confessions and increments the page by dispatching next page action so that on next trigger the data for the next page is loaded. Also adds event listener for showhing hiding scrool to the top button when we scroll far enough on component mount and removes it on component dismount.
     const fetchConfessions = async () => {
       dispatch({ type: "NEXT_PAGE" });
 
@@ -62,10 +64,11 @@ const Home = () => {
         {submitting && <SpinnerComonent />}
 
         {confessions.map((confession) => (
+          // displaying a confessions from the redux store
           <Confession key={confession._id} confession={confession} />
         ))}
         {loading && <SpinnerComonent />}
-
+        {/* if end is true the no more content div will be displayed and the fethcing of confessions fro  the server will stop */}
         {!end ? (
           ""
         ) : (

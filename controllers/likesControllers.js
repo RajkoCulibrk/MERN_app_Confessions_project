@@ -3,6 +3,8 @@ import Like from "../models/Likes.js";
 import Dislike from "../models/Dislikes.js";
 import Confession from "../models/Confession.js";
 import Comment from "../models/Comments.js";
+
+//for liking confessions, removing the like of a confession if the confession has already been liked,increments the like count of the cnfession,removes a dislike and adds a like if a confession has been disliked and decrements the number of dislikes of a confession
 export const addRemoveLikeConfession = async (req, res) => {
   const confession = req.params.id;
   const user = req.user.id;
@@ -41,6 +43,7 @@ export const addRemoveLikeConfession = async (req, res) => {
     res.status(500).json({ msg: err.message });
   }
 };
+//the same as addRemoveLikeConfession but only for dislikes
 export const addRemoveDislikeConfession = async (req, res) => {
   const confession = req.params.id;
   const user = req.user.id;
@@ -77,7 +80,7 @@ export const addRemoveDislikeConfession = async (req, res) => {
     res.status(500).json({ msg: err.message });
   }
 };
-
+//the same as addRemoveLikeConfession but only for likes of comments
 export const addRemoveLikeComment = async (req, res) => {
   const comment = req.params.id;
   const user = req.user.id;
@@ -117,7 +120,7 @@ export const addRemoveLikeComment = async (req, res) => {
     res.status(500).json({ msg: err.message });
   }
 };
-
+//the same as addRemoveLikeConfession but only for dislikes of comments
 export const addRemoveDislikeComment = async (req, res) => {
   const comment = req.params.id;
   const user = req.user.id;
@@ -152,6 +155,7 @@ export const addRemoveDislikeComment = async (req, res) => {
   }
 };
 
+//checks if the confessions or a comment has been liked , disliked or neither and sends a response in json fromat like this one { liked: true, disliked: false }
 export const likedDisliked = async (req, res) => {
   const { confession, comment } = req.body;
   const user = req.user.id;

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Alert } from "react-bootstrap";
 const Error = ({ error }) => {
   const dispatch = useDispatch();
-
+  // dispatches the remove error action afetr 3 seconds after mounting so it gets removed from the state and unmounted
   useEffect(() => {
     let t = setTimeout(() => {
       dispatch({

@@ -8,6 +8,7 @@ const Navigation = () => {
   let nav = useRef();
 
   let current = 0;
+  // adding event listener for regulating where the navbar is going to appear depending on the scroll direction we are scrooling in when scrolling down the navbar moves up and disapears of the screen. When moving back up it returns to its previous position.
   document.addEventListener("scroll", () => {
     let scrolled = window.pageYOffset;
     if (current - scrolled < 0) {
@@ -17,6 +18,7 @@ const Navigation = () => {
     }
     current = window.pageYOffset;
   });
+
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { authenticated, userInfo } = user;

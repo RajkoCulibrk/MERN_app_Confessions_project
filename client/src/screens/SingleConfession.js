@@ -19,6 +19,7 @@ const SingleConfession = () => {
     dispatch(loadSingleConfession(id));
     dispatch(loadComments(id));
   }, [dispatch, id]);
+
   return (
     <div className="mt-5 pt-5">
       {loading ? (
