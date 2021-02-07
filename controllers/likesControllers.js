@@ -21,25 +21,23 @@ export const addRemoveLikeConfession = async (req, res) => {
         await Confession.findByIdAndUpdate(confession, {
           $inc: { dislikes: -1 },
         });
-        console.log(removedDislike, "ddd");
       }
       if (like) {
         await Confession.findByIdAndUpdate(confession, {
           $inc: { likes: 1 },
         });
       }
-      console.log("added like");
+
       res.status(201).send();
     } else {
       let muki = await Like.findOneAndDelete({ user, confession });
       if (muki) {
         await Confession.findByIdAndUpdate(confession, { $inc: { likes: -1 } });
       }
-      console.log("removed like");
+
       res.status(204).send();
     }
   } catch (err) {
-    console.log(err.message, "error");
     res.status(500).json({ msg: err.message });
   }
 };
@@ -63,7 +61,7 @@ export const addRemoveDislikeConfession = async (req, res) => {
           $inc: { dislikes: 1 },
         });
       }
-      console.log("added dislike");
+
       res.status(201).send();
     } else {
       let removedDislike = await Dislike.findOneAndDelete({ user, confession });
@@ -72,11 +70,10 @@ export const addRemoveDislikeConfession = async (req, res) => {
           $inc: { dislikes: -1 },
         });
       }
-      console.log("removed dislike");
+
       res.status(204).send();
     }
   } catch (err) {
-    console.log(err.message);
     res.status(500).json({ msg: err.message });
   }
 };
@@ -98,14 +95,13 @@ export const addRemoveLikeComment = async (req, res) => {
         await Comment.findByIdAndUpdate(comment, {
           $inc: { dislikes: -1 },
         });
-        console.log(removedDislike, "ddd");
       }
       if (like) {
         await Comment.findByIdAndUpdate(comment, {
           $inc: { likes: 1 },
         });
       }
-      console.log("added like");
+
       res.status(201).send();
     } else {
       let removedLike = await Like.findOneAndDelete({ user, comment });
@@ -114,11 +110,10 @@ export const addRemoveLikeComment = async (req, res) => {
           $inc: { likes: -1 },
         });
       }
-      console.log("removed like");
+
       res.status(204).send();
     }
   } catch (err) {
-    console.log(err.message, "error");
     res.status(500).json({ msg: err.message });
   }
 };
@@ -140,7 +135,7 @@ export const addRemoveDislikeComment = async (req, res) => {
       if (dislike) {
         await Comment.findByIdAndUpdate(comment, { $inc: { dislikes: 1 } });
       }
-      console.log("added dislike");
+
       res.status(201).send();
     } else {
       let removedDislike = await Dislike.findOneAndDelete({ user, comment });
@@ -149,17 +144,15 @@ export const addRemoveDislikeComment = async (req, res) => {
           $inc: { dislikes: -1 },
         });
       }
-      console.log("removed dislike");
+
       res.status(204).send();
     }
   } catch (err) {
-    console.log(err, "adf");
     res.status(500).json({ msg: err.message });
   }
 };
 
 export const likedDisliked = async (req, res) => {
-  console.log("requested");
   const { confession, comment } = req.body;
   const user = req.user.id;
 
@@ -192,7 +185,6 @@ export const likedDisliked = async (req, res) => {
       }
     }
   } catch (err) {
-    console.log(err.message);
     res.status(500).json({ msg: err.message });
   }
 };

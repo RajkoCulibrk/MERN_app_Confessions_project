@@ -18,7 +18,6 @@ export const createConffesion = async (req, res) => {
     await confession.save();
     return res.json(confession);
   } catch (err) {
-    console.log(err.message);
     return res.status(500).send("server error");
   }
 };
@@ -42,7 +41,6 @@ export const deleteConfession = async (req, res) => {
 };
 
 export const getConfessions = async (req, res) => {
-  console.log(req.body.page);
   let page = req.body.page;
   let limit = 5;
   let skip = (page - 1) * limit;
@@ -59,11 +57,10 @@ export const getConfessions = async (req, res) => {
       .skip(skip)
       .limit(limit);
     let confessions = await c;
-    console.log(confessions);
+
     let numConfessions = await Confession.countDocuments();
 
     if (limit * page > numConfessions) {
-      console.log("nema vise");
       return res.status(200).json({ confessions, end: true });
     }
 

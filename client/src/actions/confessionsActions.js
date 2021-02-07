@@ -1,12 +1,11 @@
 import axios from "axios";
 
 export const loadConfessions = (page) => async (dispatch) => {
-  console.log("loading confessions");
   try {
     dispatch({
       type: "CONFESSIONS_LOAD_REQUEST",
     });
-    console.log(page, "sssss");
+
     const { data } = await axios.post("/api/confessions/getconfessions", {
       ...page,
     });
@@ -70,7 +69,6 @@ export const postConfession = (body) => async (dispatch) => {
 
 export const loadSingleConfession = (id) => async (dispatch) => {
   try {
-    console.log("helo");
     dispatch({
       type: "CONFESSION_LOAD_REQUEST",
     });

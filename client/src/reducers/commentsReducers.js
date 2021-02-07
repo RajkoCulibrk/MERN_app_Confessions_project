@@ -19,16 +19,16 @@ export const subcommentReducer = (state = { subcomments: [] }, action) => {
   switch (action.type) {
     case "LOAD_SUBCOMMENTS_SUCCESS":
       let temp = [...action.payload, ...state.subcomments];
-      let picka = [];
+      let filteredComments = [];
       temp.forEach((com) => {
-        if (!picka.some((x) => x._id === com._id)) {
-          picka.push(com);
+        if (!filteredComments.some((x) => x._id === com._id)) {
+          filteredComments.push(com);
         }
       });
-      console.log(picka, "fffffffff");
+
       return {
         ...state,
-        subcomments: [...picka],
+        subcomments: [...filteredComments],
       };
     case "POST_SUBCOMMENT":
       return {

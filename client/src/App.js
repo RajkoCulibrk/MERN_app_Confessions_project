@@ -23,7 +23,6 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(sortBy, "setsortby");
     dispatch(resetConfessions());
     dispatch(loadConfessions({ page, sortOrder, sortBy }));
     dispatch({ type: "NEXT_PAGE" });

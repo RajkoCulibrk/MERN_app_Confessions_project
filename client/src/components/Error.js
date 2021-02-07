@@ -3,10 +3,9 @@ import { useDispatch } from "react-redux";
 import { Alert } from "react-bootstrap";
 const Error = ({ error }) => {
   const dispatch = useDispatch();
-  console.log(error);
+
   useEffect(() => {
     let t = setTimeout(() => {
-      console.log("removing");
       dispatch({
         type: "REMOVE_ERROR",
         payload: error.id,

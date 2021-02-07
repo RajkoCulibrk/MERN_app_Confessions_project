@@ -25,7 +25,7 @@ const Home = () => {
   useEffect(() => {
     const fetchConfessions = async () => {
       dispatch({ type: "NEXT_PAGE" });
-      console.log(page, "promena");
+
       dispatch(loadConfessions({ page, sortBy, sortOrder }));
     };
     const fetchuj = () => {
@@ -41,7 +41,6 @@ const Home = () => {
     const showHideToTheTopButton = () => {
       if (window.pageYOffset > 1000) {
         toTheTopButton.current.style.visibility = "visible";
-        console.log(toTheTopButton);
       } else {
         toTheTopButton.current.style.visibility = "hidden";
       }

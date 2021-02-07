@@ -6,7 +6,6 @@ import setAuthToken from "../utils/setAuthToken";
 import axios from "axios";
 
 export const login = () => async (dispatch) => {
-  console.log("login function");
   setAuthToken(localStorage.getItem("token"));
   try {
     dispatch({
@@ -41,7 +40,7 @@ export const authenticate = (email, password) => async (dispatch) => {
     const { data } = await axios.post("/api/auth", { email, password });
     const token = data.token;
     localStorage.setItem("token", token);
-    console.log(token);
+
     if (localStorage.token) {
       dispatch(login());
     }

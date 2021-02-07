@@ -44,6 +44,7 @@ const Register = () => {
         <Form.Control
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          name="email"
           type="email"
           placeholder="Email"
         />
@@ -56,6 +57,7 @@ const Register = () => {
         <Form.Label>Password</Form.Label>
         <Form.Control
           value={password}
+          name="password"
           minLength={6}
           required
           type="password"
@@ -70,6 +72,7 @@ const Register = () => {
           value={password2}
           onChange={(e) => setPassword2(e.target.value)}
           type="password"
+          name="password2"
           placeholder="Confirm password"
         />
       </Form.Group>
