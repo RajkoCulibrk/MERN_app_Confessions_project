@@ -46,11 +46,20 @@ export const getConfessions = async (req, res) => {
   let page = req.body.page;
   let limit = 5;
   let skip = (page - 1) * limit;
+  let sortOrder = req.body.sortOrder;
+  let sortBy = req.body.sortBy;
+  /* let sortQuery = sortOrder + sortBy */
+
   try {
-    const confessions = await Confession.find()
-      .sort("-created_at")
+    const c = Confession.find()
+      .sort([
+        [sortBy, sortOrder],
+        ["_id", -1],
+      ])
       .skip(skip)
       .limit(limit);
+    let confessions = await c;
+    console.log(confessions);
     let numConfessions = await Confession.countDocuments();
 
     if (limit * page > numConfessions) {

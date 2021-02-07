@@ -1,7 +1,13 @@
 import Comment from "../models/Comments.js";
 import Confession from "../models/Confession.js";
 import User from "../models/User.js";
+import validator from "express-validator";
+const { validationResult } = validator;
 export const postComment = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const user = req.user.id;
   const author = (await User.findById(user)).name;
   console.log(author, "ovde");
